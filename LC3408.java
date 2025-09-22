@@ -37,6 +37,7 @@ class LC3408 {
 
 
         // task has [userId, taskId, priority]
+        @SuppressWarnings("OverridableMethodCallInConstructor")
         public TaskManager(List<List<Integer>> tasks) {
 
             for (var task: tasks) {
@@ -80,6 +81,5 @@ class LC3408 {
             }
             return -1;
         }
-
-
     }
+}
