@@ -1,10 +1,9 @@
 import java.util.*;
 
-
 class LC0994 {
 
 	static class Solution {
-		private static final int EMPTY = 0;
+		// private static final int EMPTY = 0;
 		private static final int FRESH = 1;
 		private static final int ROTTEN = 2;
 		/**
