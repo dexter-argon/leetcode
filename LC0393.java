@@ -9,25 +9,25 @@ class LC0393 {
 		 */
 		public boolean validUtf8(int[] data) {
 
-			for (int i = 0; i < data.length; ) {
+			int bytesToFollow = 0;
+			for (int i = 0; i < data.length; i += 1) {
 				byte utfByte = (byte) data[i];
-				int length = sequenceLength(utfByte);
+				if (bytesToFollow == 0) {
+					int length = sequenceLength(utfByte);
 
-				if (length == -1 || ((i + length) > data.length)) {
-					return false; // invalid first byte
-				}
-				var j = i + 1;
-				while (j < i + length) {
-					byte nextByte = (byte) data[j++];
-					if (!isContinuationByte(nextByte)) {
-						return false;
+					if (length == -1) {
+						return false; // invalid first byte
 					}
+					bytesToFollow = length - 1;
+				} else {
+					if (!isContinuationByte(utfByte)) {
+						return false; // invalid continuation byte
+					}
+					bytesToFollow--;
 				}
 
-				i += length; 
 			}
-
-			return true;
+			return bytesToFollow == 0;
 		}
 
 		private boolean isContinuationByte(byte b) {
@@ -49,7 +49,6 @@ class LC0393 {
 				// 1111 0xxx
 				return 4;
 			}
-
 			return -1;
 		}
 	}
