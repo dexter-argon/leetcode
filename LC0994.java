@@ -13,7 +13,7 @@ class LC0994 {
 		*/	
 		// BFS seems appropriate, but where do we start, as there could be multiple rotton oranges.
 		public int orangesRotting(int[][] grid) {
-			int timeElapsed = -1;
+			int timeElapsed = 0;
 			int freshOrangesCount = 0;
 			int[] directions = new int[]{0, 1, 0, -1};
 			Queue<int[]> q = new LinkedList<>();
@@ -25,10 +25,6 @@ class LC0994 {
 						freshOrangesCount += 1;
 					}
 				}
-			}
-
-			if (freshOrangesCount == 0) {
-				return 0;
 			}
 
 			while(!q.isEmpty()) {
@@ -51,9 +47,9 @@ class LC0994 {
 							rottenInThisMinute = true;
 						}
 					}
-					if (rottenInThisMinute) {
-						timeElapsed += 1;
-					}
+				}
+				if (rottenInThisMinute) {
+					timeElapsed += 1;
 				}
 			}
 
