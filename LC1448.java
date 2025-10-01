@@ -24,7 +24,10 @@ class LC1448 {
 		 * @param: root of an Binary Tree (Not BST)
 		 */
 		public int goodNodes(TreeNode root) {
-			return countGoodNodes(root, Integer.MIN_VALUE);
+			if (root == null) {
+				return 0;
+			}
+			return countGoodNodes(root, root.val);
 		}
 
 		public int countGoodNodes(TreeNode node, int maxNodeValueSeenSoFar) {
@@ -32,11 +35,12 @@ class LC1448 {
 				return 0;
 			}
 			maxNodeValueSeenSoFar = Math.max(maxNodeValueSeenSoFar, node.val);
+			int count = (maxNodeValueSeenSoFar == node.val) ? 1 : 0;
 
 			int leftGoodNodes = countGoodNodes(node.left, maxNodeValueSeenSoFar);
 			int rightGoodNodes = countGoodNodes(node.right, maxNodeValueSeenSoFar);
 
-			return leftGoodNodes + rightGoodNodes + ((maxNodeValueSeenSoFar == node.val) ? 1 : 0);
+			return count + leftGoodNodes + rightGoodNodes;
 		}
 	}
 }
