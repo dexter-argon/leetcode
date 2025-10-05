@@ -26,15 +26,11 @@ class LC0021 {
 
 			while (list1 != null && list2 != null) {
 				if (list1.val < list2.val) {
-					var nextNode = list1.next;
-					list1.next = null;
 					node.next = list1;
-					list1 = nextNode;
+					list1 = list1.next;
 				} else {
-					var nextNode = list2.next;
-					list2.next = null;
 					node.next = list2;
-					list2 = nextNode;
+					list2 = list2.next;
 				}
 				node = node.next;
 			}
