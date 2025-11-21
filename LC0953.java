@@ -9,11 +9,9 @@ public class LC0953 {
 				alphabetMap.put(order.charAt(i), i);
 			}
 
-			for (int i = 0; i < words.length; ++i) {
-				for (int j = i + 1; j < words.length; ++j) {
-					if (compareAlienWords(words[i], words[j], alphabetMap) > 0) {
-						return false;
-					}
+			for (int i = 0; i + 1 < words.length; ++i) {
+				if (compareAlienWords(words[i], words[i + 1], alphabetMap) > 0) {
+					return false;
 				}
 			}
 			return true;
@@ -23,7 +21,7 @@ public class LC0953 {
 			int m = firstStr.length(), n = secondStr.length();
 			for (var i = 0; i < Math.min(m, n); ++i) {
 				char c1 = firstStr.charAt(i), c2 = secondStr.charAt(i);
-				if (firstStr.charAt(i) == secondStr.charAt(i)) {
+				if (c1 == c2) {
 					continue;
 				} else if (alphabetMap.get(c1) > alphabetMap.get(c2)) {
 					return 1;
